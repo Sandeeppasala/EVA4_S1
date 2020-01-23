@@ -1,0 +1,150 @@
+1) What are Channels and Kernels (according to EVA)?
+
+> Kernels are feature extractors/ filters.
+> Channels are number of input paths on which we apply Kernels for feature extraction (R- G- B 3 channels)
+
+2) Why should we (nearly) always use 3x3 kernels?
+
+> It's simple to use
+
+> 3x3 has an axis of Symmetry.
+
+> It correlates the neighbour pixel data as 9 adjacent pixels are used for calculation
+      with a stride of 1.
+
+> A 2x2 kernel can be realized with 3x3 kernel setting the last column and last row with zeros.
+
+> Reduced number of parameters.
+
+> 3x3 Kernal has hardware acceleration from chip manufactures.
+
+3) How many times to we need to perform 3x3 convolutions operations
+to reach close to 1x1 from 199x199 (type each layer output like 199x199 > 197x197...)
+
+199/2 = 99 3x3 convolutions needs to be performed to reach 1x1
+These are described below
+
+199x199 --3x3--Kernel--> 197x197 --->1
+197x197 --3x3--Kernel--> 195x195 --->2
+195x195 --3x3--Kernel--> 193x193 --->3
+193x193 --3x3--Kernel--> 191x191 --->4
+191x191 --3x3--Kernel--> 189x189 --->5
+
+189x189 --3x3--Kernel--> 187x187 --->6
+187x187 --3x3--Kernel--> 185x185 --->7
+185x185 --3x3--Kernel--> 183x183 --->8
+183x183 --3x3--Kernel--> 181x181 --->9
+181x181 --3x3--Kernel--> 179x179 --->10
+
+179x179 --3x3--Kernel--> 177x177 --->11
+177x177 --3x3--Kernel--> 175x175 --->12
+175x175 --3x3--Kernel--> 173x173 --->13
+173x173 --3x3--Kernel--> 171x171 --->14
+171x171 --3x3--Kernel--> 169x169 --->15
+
+169x169 --3x3--Kernel--> 167x167 --->16
+167x167 --3x3--Kernel--> 165x165 --->17
+165x165 --3x3--Kernel--> 163x163 --->18
+163x163 --3x3--Kernel--> 161x161 --->19
+161x161 --3x3--Kernel--> 159x159 --->20
+
+159x159 --3x3--Kernel--> 157x157 --->21
+157x157 --3x3--Kernel--> 155x155 --->22
+155x155 --3x3--Kernel--> 153x153 --->23
+153x153 --3x3--Kernel--> 151x151 --->24
+151x151 --3x3--Kernel--> 149x149 --->25
+
+149x149 --3x3--Kernel--> 147x147 --->26
+147x147 --3x3--Kernel--> 145x145 --->27
+145x145 --3x3--Kernel--> 143x143 --->28
+143x143 --3x3--Kernel--> 141x141 --->29
+141x141 --3x3--Kernel--> 139x139 --->30
+
+139x139 --3x3--Kernel--> 137x137 --->31
+137x137 --3x3--Kernel--> 135x135 --->32
+135x135 --3x3--Kernel--> 133x133 --->33
+133x133 --3x3--Kernel--> 131x131 --->34
+131x131 --3x3--Kernel--> 129x129 --->35
+
+129x129 --3x3--Kernel--> 127x127 --->36
+127x127 --3x3--Kernel--> 125x125 --->37
+125x125 --3x3--Kernel--> 123x123 --->38
+123x123 --3x3--Kernel--> 121x121 --->39
+121x121 --3x3--Kernel--> 119x119 --->40
+
+119x119 --3x3--Kernel--> 117x117 --->41
+117x117 --3x3--Kernel--> 115x115 --->42
+115x115 --3x3--Kernel--> 113x113 --->43
+113x113 --3x3--Kernel--> 111x1!1 --->44
+111x111 --3x3--Kernel--> 109x109 --->45
+
+109x109 --3x3--Kernel--> 107x107 --->46
+107x107 --3x3--Kernel--> 105x105 --->47
+105x105 --3x3--Kernel--> 103x103 --->48
+103x103 --3x3--Kernel--> 101x101 --->49
+101x101 --3x3--Kernel--> 99x99 --->50
+
+99x99 --3x3--Kernel--> 97x97 --->51
+97x97 --3x3--Kernel--> 95x95 --->52
+95x95 --3x3--Kernel--> 93x93 --->53
+93x93 --3x3--Kernel--> 91x91 --->54
+91x91 --3x3--Kernel--> 89x89 --->55
+
+89x89 --3x3--Kernel--> 87x87 --->56
+87x87 --3x3--Kernel--> 85x85 --->57
+85x85 --3x3--Kernel--> 83x83 --->58
+83x83 --3x3--Kernel--> 81x81 --->59
+81x81 --3x3--Kernel--> 79x79 --->60
+
+79x79 --3x3--Kernel--> 77x77 --->61
+77x77 --3x3--Kernel--> 75x75 --->62
+75x75 --3x3--Kernel--> 73x73 --->63
+73x73 --3x3--Kernel--> 71x71 --->64
+71x71 --3x3--Kernel--> 69x69 --->65
+
+69x69 --3x3--Kernel--> 67x67 --->66
+67x67 --3x3--Kernel--> 65x65 --->67
+65x65 --3x3--Kernel--> 63x63 --->68
+63x63 --3x3--Kernel--> 61x61 --->69
+61x61 --3x3--Kernel--> 59x59 --->70
+
+59x59 --3x3--Kernel--> 57x57 --->71
+57x57 --3x3--Kernel--> 55x55 --->72
+55x55 --3x3--Kernel--> 53x53 --->73
+53x53 --3x3--Kernel--> 51x51 --->74
+51x51 --3x3--Kernel--> 49x49 --->75
+
+49x49 --3x3--Kernel--> 47x47 --->76
+47x47 --3x3--Kernel--> 45x45 --->77
+45x45 --3x3--Kernel--> 43x43 --->78
+43x43 --3x3--Kernel--> 41x41 --->79
+41x41 --3x3--Kernel--> 39x39 --->80
+
+39x39 --3x3--Kernel--> 37x37 --->81
+37x37 --3x3--Kernel--> 35x35 --->82
+35x35 --3x3--Kernel--> 33x33 --->83
+33x33 --3x3--Kernel--> 31x31 --->84
+31x31 --3x3--Kernel--> 29x29 --->85
+
+29x29 --3x3--Kernel--> 27x27 --->86
+27x27 --3x3--Kernel--> 25x25 --->87
+25x25 --3x3--Kernel--> 23x23 --->88
+23x23 --3x3--Kernel--> 21x21 --->89
+21x21 --3x3--Kernel--> 19x19 --->90
+
+19x19 --3x3--Kernel--> 17x17 --->91
+17x17 --3x3--Kernel--> 15x15 --->92
+15x15 --3x3--Kernel--> 13x13 --->93
+13x13 --3x3--Kernel--> 11x!1 --->94
+11x11 --3x3--Kernel--> 09x09 --->95
+
+09x09 --3x3--Kernel--> 07x07 --->96
+07x07 --3x3--Kernel--> 05x05 --->97
+05x05 --3x3--Kernel--> 03x03 --->98
+03x03 --3x3--Kernel--> 01x01 --->99
+
+4) How are kernels initialized?
+> Randomly.
+
+5) What happens during the training of a DNN?
+> With the kernels we are using in training we will get the feature extractor.
