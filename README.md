@@ -1,4 +1,4 @@
-Python code for Karpathy blog
+Python code for Karpathy's blog
 
 http://karpathy.github.io/neuralnets/
 
